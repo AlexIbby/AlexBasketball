@@ -7,15 +7,8 @@ from api_helper_functions import parse_yahoo_response_to_xml, extract_fantasy_in
 from data_base_helper_functions import update_or_create_user
 from models import db, User
 import logging
-from uuid import uuid4  # for generating a unique state string
-from flask import request
 
-log = logging.getLogger('authlib')
-log.setLevel(logging.DEBUG)
-log.addHandler(logging.StreamHandler())
-
-def return_yahoo_client_keys():
-    return os.environ.get('YAHOO_CONSUMER_KEY'), os.environ.get('YAHOO_CONSUMER_SECRET'), "https://alexball.up.railway.app/callback"
+logging.basicConfig(level=logging.DEBUG)
 
 # Initialize Flask and OAuth
 app = Flask(__name__)
@@ -46,17 +39,14 @@ def index():
 
 @app.route('/login')
 def login():
-    state = str(uuid4())
-    session['oauth_state'] = state  # Store state in session
-    client_id, _, redirect_uri = return_yahoo_client_keys()
-    uri = f'https://api.login.yahoo.com/oauth2/request_auth?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code&state={state}'
-    return redirect(uri)
+    redirect_uri = "https://alexball.up.railway.app/callback"
+
+    print(redirect_uri)
+
+    return yahoo.authorize_redirect(redirect_uri)
 
 @app.route('/callback')
 def authorize():
-    state = request.args.get('state')  # Read state from incoming request
-    if state != session.get('oauth_state'):  # Compare it with the stored state
-        return 'State does not match', 400
 
     try:
         token = yahoo.authorize_access_token()
