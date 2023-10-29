@@ -34,7 +34,7 @@ def index():
 
 @app.route('/login')
 def login():
-    redirect_uri = "https://alexball.up.railway.app//callback"
+    redirect_uri = "https://alexball.up.railway.app/callback"
     return yahoo.authorize_redirect(redirect_uri)
 
 @app.route('/callback')
