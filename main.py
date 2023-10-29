@@ -7,8 +7,14 @@ from api_helper_functions import parse_yahoo_response_to_xml, extract_fantasy_in
 from data_base_helper_functions import update_or_create_user
 from models import db, User
 import logging
+from urllib.parse import quote
+
 
 logging.basicConfig(level=logging.DEBUG)
+
+original_url = "https://alexball.up.railway.app/callback"
+encoded_url = quote(original_url, safe=':/')
+
 
 # Initialize Flask and OAuth
 app = Flask(__name__)
@@ -39,7 +45,7 @@ def index():
 
 @app.route('/login')
 def login():
-    redirect_uri = "https://alexball.up.railway.app/callback"
+    redirect_uri = encoded_url
 
     print(redirect_uri)
 
