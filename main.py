@@ -30,17 +30,21 @@ yahoo = oauth.register(
 
 @app.route('/')
 def index():
-    print(os.environ.get('YAHOO_CONSUMER_KEY'))
+    print(f"Consumer Key/Client ID: {os.environ.get('YAHOO_CONSUMER_KEY')}")
+    print(f"Consumer Secret : {os.environ.get('YAHOO_CONSUMER_SECRETY')} "  )
     return 'Welcome! <a href="/login">Login with Yahoo</a>'
 
 @app.route('/login')
 def login():
     redirect_uri = "https://alexball.up.railway.app/callback"
+    print(redirect_uri)
+
     return yahoo.authorize_redirect(redirect_uri)
 
 @app.route('/callback')
 def authorize():
     token = yahoo.authorize_access_token()
+    print(token)
     session['token'] = token
 
     # Fetch user info from Yahoo
