@@ -31,7 +31,7 @@ yahoo = oauth.register(
 @app.route('/')
 def index():
     print(f"Consumer Key/Client ID: {os.environ.get('YAHOO_CONSUMER_KEY')}")
-    print(f"Consumer Secret : {os.environ.get('YAHOO_CONSUMER_SECRETY')} "  )
+    print(f"Consumer Secret : {os.environ.get('YAHOO_CONSUMER_SECRET')} "  )
     return 'Welcome! <a href="/login">Login with Yahoo</a>'
 
 @app.route('/login')
