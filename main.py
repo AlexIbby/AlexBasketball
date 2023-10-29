@@ -8,7 +8,9 @@ from data_base_helper_functions import update_or_create_user
 from models import db, User
 import logging
 
-logging.basicConfig(level=logging.DEBUG)
+log = logging.getLogger('authlib')
+log.setLevel(logging.DEBUG)
+log.addHandler(logging.StreamHandler())
 
 # Initialize Flask and OAuth
 app = Flask(__name__)
