@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, redirect, url_for, session
+from flask import Flask, jsonify, redirect, url_for, session, request
 import os
 from authlib.integrations.flask_client import OAuth
 from flask_sqlalchemy import SQLAlchemy
@@ -9,6 +9,7 @@ from models import db, User
 import logging
 from urllib.parse import quote
 from werkzeug.middleware.proxy_fix import ProxyFix
+import secrets
 
 
 logging.basicConfig(level=logging.DEBUG)
@@ -31,13 +32,14 @@ db.init_app(app)
 oauth = OAuth(app)
 yahoo = oauth.register(
     name='yahoo',
-    client_id= os.environ.get('YAHOO_CONSUMER_KEY'),
-    client_secret= os.environ.get('YAHOO_CONSUMER_SECRET'),
+    client_id=os.environ.get('YAHOO_CONSUMER_KEY'),
+    client_secret=os.environ.get('YAHOO_CONSUMER_SECRET'),
     access_token_url='https://api.login.yahoo.com/oauth2/get_token',
     authorize_url='https://api.login.yahoo.com/oauth2/request_auth',
     api_base_url='https://api.login.yahoo.com/',
-    client_kwargs={'scope': 'fspt-r'}
+    client_kwargs={'scope': 'fspt-r+openid+email'}
 )
+
 
 @app.route('/')
 def index():
@@ -48,13 +50,16 @@ def index():
 @app.route('/login')
 def login():
     redirect_uri = encoded_url
-
+    state = secrets.token_urlsafe(16)
     print(redirect_uri)
 
-    return yahoo.authorize_redirect(redirect_uri)
+    return yahoo.authorize_redirect(redirect_uri, state=state)
 
 @app.route('/callback')
 def authorize():
+    state = request.args.get('state')  # Verify this state with the one you generated
+    if not state:
+        return 'Missing state parameter', 400
 
     try:
         token = yahoo.authorize_access_token()
