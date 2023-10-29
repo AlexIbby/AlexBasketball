@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fantasy_content xml:lang="en-US" yahoo:uri="http://fantasysports.yahooapis.com/fantasy/v2/users;use_login=1/games;game_keys=nba.2023/leagues/teams" time="47.574043273926ms" copyright="Certain Data by Sportradar, Stats Perform and Rotowire" refresh_rate="60" xmlns:yahoo="http://www.yahooapis.com/v1/base.rng" xmlns="http://fantasysports.yahooapis.com/fantasy/v2/base.rng">
+ <users count="1">
+  <user>
+   <guid>QVM5SBU6O52ZWKMYXTHL324KUB</guid>
+   <games count="1">
+    <game>
+     <game_key>428</game_key>
+     <game_id>428</game_id>
+     <name>Basketball</name>
+     <code>nba</code>
+     <type>full</type>
+     <url>https://basketball.fantasysports.yahoo.com/nba</url>
+     <season>2023</season>
+     <is_registration_over>0</is_registration_over>
+     <is_game_over>0</is_game_over>
+     <is_offseason>0</is_offseason>
+     <is_live_draft_lobby_active>1</is_live_draft_lobby_active>
+     <leagues count="1">
+      <league>
+       <league_key>428.l.50576</league_key>
+       <league_id>50576</league_id>
+       <name>For Realzz</name>
+       <url>https://basketball.fantasysports.yahoo.com/nba/50576</url>
+       <logo_url>https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/30406320337_6671ba.jpg</logo_url>
+       <draft_status>postdraft</draft_status>
+       <num_teams>10</num_teams>
+       <edit_key>2023-10-29</edit_key>
+       <weekly_deadline>intraday</weekly_deadline>
+       <league_update_timestamp>1698565676</league_update_timestamp>
+       <scoring_type>head</scoring_type>
+       <league_type>private</league_type>
+       <renew>418_89398</renew>
+       <renewed/>
+       <felo_tier>silver</felo_tier>
+       <iris_group_chat_id/>
+       <allow_add_to_dl_extra_pos>1</allow_add_to_dl_extra_pos>
+       <is_pro_league>0</is_pro_league>
+       <is_cash_league>0</is_cash_league>
+       <current_week>1</current_week>
+       <start_week>1</start_week>
+       <start_date>2023-10-24</start_date>
+       <end_week>21</end_week>
+       <end_date>2024-03-24</end_date>
+       <is_plus_league>0</is_plus_league>
+       <game_code>nba</game_code>
+       <season>2023</season>
+       <teams count="1">
+        <team>
+         <team_key>428.l.50576.t.3</team_key>
+         <team_id>3</team_id>
+         <name>Barack O'Balla</name>
+         <is_owned_by_current_login>1</is_owned_by_current_login>
+         <url>https://basketball.fantasysports.yahoo.com/nba/50576/3</url>
+         <team_logos>
+          <team_logo>
+           <size>large</size>
+           <url>https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/57363084404_c436c5.jpg</url>
+          </team_logo>
+         </team_logos>
+         <waiver_priority>10</waiver_priority>
+         <number_of_moves>2</number_of_moves>
+         <number_of_trades>0</number_of_trades>
+         <roster_adds>
+          <coverage_type>week</coverage_type>
+          <coverage_value>1</coverage_value>
+          <value>1</value>
+         </roster_adds>
+         <league_scoring_type>head</league_scoring_type>
+         <has_draft_grade>0</has_draft_grade>
+         <auction_budget_total>200</auction_budget_total>
+         <auction_budget_spent>200</auction_budget_spent>
+         <managers>
+          <manager>
+           <manager_id>3</manager_id>
+           <nickname>Alex</nickname>
+           <guid>QVM5SBU6O52ZWKMYXTHL324KUB</guid>
+           <is_current_login>1</is_current_login>
+           <email>alex.a.ibrahim@gmail.com</email>
+           <image_url>https://s.yimg.com/ag/images/default_user_profile_pic_64sq.jpg</image_url>
+           <felo_score>720</felo_score>
+           <felo_tier>gold</felo_tier>
+          </manager>
+         </managers>
+        </team>
+       </teams>
+      </league>
+     </leagues>
+    </game>
+   </games>
+  </user>
+ </users>
+</fantasy_content>
+<!-- fantasy-sports-api- -public-production-bf1-bc944f84d-dgccs Sun Oct 29 19:19:51 UTC 2023 -->
