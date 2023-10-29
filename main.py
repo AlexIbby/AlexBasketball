@@ -8,7 +8,7 @@ from data_base_helper_functions import update_or_create_user
 from models import db, User
 import logging
 from urllib.parse import quote
-
+from datetime import datetime
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -61,12 +61,24 @@ def authorize():
     except Exception as e:
         print(f"Exception: {e}")
         return str(e), 400
-    
-    
-    session['token'] = token
+
+    # Assuming update_or_create_user saves token information in the database
+    existing_user = update_or_create_user(token, None) # Replace None with extracted fantasy info if available here
+
+    # Get the token expiry time from the database
+    token_expires_at = datetime.fromtimestamp(existing_user.expires_at)
+
+    # Refresh token if necessary
+    if datetime.utcnow() > token_expires_at:
+        new_token = yahoo.fetch_access_token(
+            'https://api.login.yahoo.com/oauth2/get_token',
+            grant_type='refresh_token',
+            refresh_token=existing_user.refresh_token,
+        )
+        existing_user = update_or_create_user(new_token, None)  # Update the existing user with new token information
 
     # Fetch user info from Yahoo
-    response = yahoo.get('https://fantasysports.yahooapis.com/fantasy/v2/users;use_login=1/games;game_keys=nba.2023/leagues/teams')
+    response = yahoo.get('https://fantasysports.yahooapis.com/fantasy/v2/users;use_login=1/games;game_keys=nba.2023/leagues/teams', token=existing_user.access_token)
 
     # Print the status code
     print(f"Yahoo API response status code: {response.status_code}")
