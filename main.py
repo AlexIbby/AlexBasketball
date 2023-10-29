@@ -37,7 +37,7 @@ yahoo = oauth.register(
     access_token_url='https://api.login.yahoo.com/oauth2/get_token',
     authorize_url='https://api.login.yahoo.com/oauth2/request_auth',
     api_base_url='https://api.login.yahoo.com/',
-    client_kwargs={'scope': 'fspt-r+openid+email'}
+    client_kwargs={'scope': 'fspt-r openid email'}
 )
 
 
