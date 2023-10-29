@@ -12,6 +12,9 @@ log = logging.getLogger('authlib')
 log.setLevel(logging.DEBUG)
 log.addHandler(logging.StreamHandler())
 
+def return_yahoo_client_keys():
+    return os.environ.get('YAHOO_CONSUMER_KEY'), os.environ.get('YAHOO_CONSUMER_SECRET'), "https://alexball.up.railway.app/callback"
+
 # Initialize Flask and OAuth
 app = Flask(__name__)
 app.secret_key = 'blue'  # Change this!
@@ -41,11 +44,9 @@ def index():
 
 @app.route('/login')
 def login():
-    redirect_uri = "https://alexball.up.railway.app/callback"
-
-    print(redirect_uri)
-
-    return yahoo.authorize_redirect(redirect_uri)
+    client_id, _, redirect_uri = return_yahoo_client_keys()
+    uri = 'https://api.login.yahoo.com/oauth2/request_auth?client_id=' + client_id + '&redirect_uri=' + redirect_uri + '&response_type=code'
+    return redirect(uri)
 
 @app.route('/callback')
 def authorize():
