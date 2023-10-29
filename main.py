@@ -8,6 +8,7 @@ from data_base_helper_functions import update_or_create_user
 from models import db, User
 import logging
 from urllib.parse import quote
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 
 logging.basicConfig(level=logging.DEBUG)
@@ -19,6 +20,7 @@ encoded_url = quote(original_url, safe=':/')
 # Initialize Flask and OAuth
 app = Flask(__name__)
 app.secret_key = 'blue'  # Change this!
+app.wsgi_app = ProxyFix(app.wsgi_app)
 
 # change this to your Railway PostgreSQL URL
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:54-GGB44bB1A-*5Cg16Dg**bb5gf2A*D@viaduct.proxy.rlwy.net:28341/railway'
