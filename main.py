@@ -6,6 +6,9 @@ import psycopg2
 from api_helper_functions import parse_yahoo_response_to_xml, extract_fantasy_info
 from data_base_helper_functions import update_or_create_user
 from models import db, User
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
 
 # Initialize Flask and OAuth
 app = Flask(__name__)
@@ -44,8 +47,16 @@ def login():
 
 @app.route('/callback')
 def authorize():
-    token = yahoo.authorize_access_token()
-    print(token)
+
+    try:
+        token = yahoo.authorize_access_token()
+        print(f"Size of token: {len(str(token))} bytes")
+        print(token)
+    except Exceptions as e:
+        print(f"Exception: {e}")
+        return str(e), 400
+    
+    
     session['token'] = token
 
     # Fetch user info from Yahoo
