@@ -52,7 +52,7 @@ def authorize():
         token = yahoo.authorize_access_token()
         print(f"Size of token: {len(str(token))} bytes")
         print(token)
-    except Exceptions as e:
+    except Exception as e:
         print(f"Exception: {e}")
         return str(e), 400
     
