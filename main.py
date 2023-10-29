@@ -37,6 +37,10 @@ def index():
 @app.route('/login')
 def login():
     redirect_uri = "https://alexball.up.railway.app/callback"
+
+    token = yahoo.authorize_access_token()
+    print(token)
+    
     print(redirect_uri)
 
     return yahoo.authorize_redirect(redirect_uri)
@@ -49,7 +53,10 @@ def authorize():
 
     # Fetch user info from Yahoo
     response = yahoo.get('https://fantasysports.yahooapis.com/fantasy/v2/users;use_login=1/games;game_keys=nba.2023/leagues/teams')
-    
+
+    # Print the status code
+    print(f"Yahoo API response status code: {response.status_code}")
+
     # Get and print the XML response
     xml_response = response.content.decode('utf-8')
 
