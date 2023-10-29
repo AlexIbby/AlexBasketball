@@ -52,12 +52,13 @@ def login():
     redirect_uri = encoded_url
     state = secrets.token_urlsafe(16)
     print(redirect_uri)
-
+    print(f"State sent:{state}")
     return yahoo.authorize_redirect(redirect_uri, state=state)
 
 @app.route('/callback')
 def authorize():
     state = request.args.get('state')  # Verify this state with the one you generated
+    print(f"State validated:{state}")
     if not state:
         return 'Missing state parameter', 400
 
