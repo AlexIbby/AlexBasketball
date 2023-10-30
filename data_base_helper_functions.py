@@ -3,7 +3,8 @@ from models import User, db
 
 def update_or_create_user(token, extracted_user_info):
     # Replace the query logic based on how you're checking for existing users
-    existing_user = User.query.filter_by(access_token=token.get('access_token')).first()
+
+    existing_user = User.query.filter_by(yahoo_user_id=extracted_user_info.get('yahoo_user_id')).first()
 
     if existing_user:
         # Update existing user's fields

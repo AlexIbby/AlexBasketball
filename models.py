@@ -5,7 +5,7 @@ db = SQLAlchemy()
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    yahoo_user_id = db.Column(db.String(256))  # Yahoo User ID
+    yahoo_user_id = db.Column(db.String(256), unique=True)  # Yahoo User ID
     access_token = db.Column(db.String(2048))
     expires_at = db.Column(db.Integer)
     expires_in = db.Column(db.Integer)
