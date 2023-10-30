@@ -103,6 +103,10 @@ def authorize():
 
 if __name__ == '__main__':
     with app.app_context():
+        print("Deleting all tables...")
         db.drop_all()
+        print("Creating all tables...")
         db.create_all()
+        print("Committing changes...")
+        db.session.commit()
     app.run(debug=True, port=os.getenv("PORT", default=5000))
