@@ -59,10 +59,12 @@ def login():
 
 @app.route('/callback')
 def authorize():
-    state = request.args.get('state')  # Verify this state with the one you generated
-    print(f"State validated:{state}")
-    if not state:
-        return 'Missing state parameter', 400
+    received_state = request.args.get('state')  # State received from Yahoo
+    session_state = session.get('state')  # State you generated and saved in session
+    
+    # Verify the state
+    if received_state is None or session_state is None or received_state != session_state:
+        return 'State mismatch. Authorization failed.', 400
 
     try:
         token = yahoo.authorize_access_token()
