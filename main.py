@@ -30,6 +30,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
 oauth = OAuth(app)
+
 yahoo = oauth.register(
     name='yahoo',
     client_id=os.environ.get('YAHOO_CONSUMER_KEY'),
@@ -37,10 +38,11 @@ yahoo = oauth.register(
     access_token_url='https://api.login.yahoo.com/oauth2/get_token',
     authorize_url='https://api.login.yahoo.com/oauth2/request_auth',
     api_base_url='https://api.login.yahoo.com/',
-    client_kwargs={'scope': 'fspt-r openid email'}
+    client_kwargs={
+        'scope': 'fspt-r openid email',
+        'jwks_uri': 'https://api.login.yahoo.com/openid/v1/certs'  # As found in your discovery document
+    },
 )
-
-
 @app.route('/')
 def index():
     print(f"Consumer Key/Client ID: {os.environ.get('YAHOO_CONSUMER_KEY')}")
