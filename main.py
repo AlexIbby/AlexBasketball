@@ -52,6 +52,7 @@ def index():
 def login():
     redirect_uri = encoded_url
     state = secrets.token_urlsafe(16)
+    session['state'] = state
     print(redirect_uri)
     print(f"State sent:{state}")
     return yahoo.authorize_redirect(redirect_uri, state=state)
